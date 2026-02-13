@@ -2,116 +2,148 @@
 <html>
 <head>
   <title>Be My Valentine 💖</title>
+
   <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+    /* Make page full height */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #d8b4f8, #fbc2eb);
+      overflow: hidden;
+    }
 
-    background: linear-gradient(to bottom right, #d8b4f8, #fbc2eb);
-    overflow: hidden;
-  }
+    /* Center card box */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 50px 70px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
 
-  h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-align: center;
-  }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 25px;
+    }
 
-  #yesBtn, #noBtn {
-    font-size: 20px;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    #yesBtn, #noBtn {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-  #yesBtn {
-    background-color: #ff4d6d;
-    color: white;
-  }
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
 
-  #noBtn {
-    background-color: gray;
-    color: white;
-  }
+    #noBtn {
+      background-color: gray;
+      color: white;
+    }
 
-  /* Floating hearts container */
-  .hearts {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-  }
+    /* Floating hearts container */
+    .hearts {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-  .heart {
-    position: absolute;
-    bottom: 0;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-  }
-
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0);
+    .heart {
+      position: absolute;
+      bottom: 0;
+      font-size: 20px;
+      animation: floatUp linear forwards;
       opacity: 0.8;
     }
-    100% {
-      transform: translateY(-100vh);
-      opacity: 0;
-    }
-  }
-</style>
 
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
   <div class="hearts" id="hearts"></div>
 
-  <h1>Sonia will you be my Valentine? 💘</h1>
+  <div class="card">
+    <h1>Sonia will you be my Valentine? 💘</h1>
 
-  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-  <button id="noBtn" onclick="growYes()">No 😢</button>
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
+  </div>
 
   <script>
     let yesSize = 20;
 
-    function growYes() {
-      yesSize += 10;
-      document.getElementById("yesBtn").style.fontSize = yesSize + "px";
-    }
+    function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  const card = document.querySelector(".card");
+
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = cardRect.width - btnRect.width;
+  const maxY = cardRect.height - btnRect.height;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
 
     function yesClicked() {
-      document.body.innerHTML = "<h1>YAY!!! 💕 I knew you'd say yes 😍</h1>";
+      document.querySelector("h1").innerHTML =
+        "YAY!!! 💕 I knew you'd say yes 😍";
+      document.getElementById("yesBtn").style.display = "none";
+      document.getElementById("noBtn").style.display = "none";
     }
+
     function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
 
-    document.getElementById("hearts").appendChild(heart);
+      document.getElementById("hearts").appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
-  }
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
     setInterval(createHeart, 300);
   </script>
 
