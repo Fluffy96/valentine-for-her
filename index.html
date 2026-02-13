@@ -3,6 +3,48 @@
 <head>
   <title>Be My Valentine 💖</title>
   <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(to bottom right, #d8b4f8, #fbc2eb);
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  #yesBtn, #noBtn {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+  }
+
+  #noBtn {
+    background-color: gray;
+    color: white;
+  }
+
   /* Floating hearts container */
   .hearts {
     position: fixed;
@@ -14,7 +56,6 @@
     overflow: hidden;
   }
 
-  /* Individual heart */
   .heart {
     position: absolute;
     bottom: 0;
@@ -23,49 +64,15 @@
     opacity: 0.8;
   }
 
-  /* Floating animation */
   @keyframes floatUp {
     0% {
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
       opacity: 0.8;
     }
     100% {
-      transform: translateY(-100vh) scale(1.5);
+      transform: translateY(-100vh);
       opacity: 0;
     }
-  }
-
-  body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    margin-top: 100px;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #d8b4f8, #fbc2eb);
-  }
-
-  h1 {
-    font-size: 2.5em;
-  }
-
-  #yesBtn {
-    font-size: 20px;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #ff4d6d;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #noBtn {
-    font-size: 20px;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
   }
 </style>
 
